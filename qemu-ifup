@@ -1,4 +1,10 @@
 #!/bin/bash
 
+brctl addbr br0
+ifconfig eth0 0.0.0.0 promisc up
+brctl addif br0 eth0
+dhclient br0
+iptables -F FORWARD
+
 ifconfig $1 0.0.0.0 promisc up
 brctl addif br0 $1
